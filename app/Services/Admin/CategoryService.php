@@ -14,7 +14,7 @@ class CategoryService
 
     public function destroy(Category $category)
     {
-        if ($category->children->count() == 0) {
+        if ($category->children->count() == 0 and $category->posts->count() == 0) {
             session()->flash('warning', "Категория удалена");
             $category->delete();
         } else {

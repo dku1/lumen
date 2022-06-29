@@ -5,6 +5,11 @@
             selected
             @elseif($category->id == $categoryObj->id)
             disabled
+            @endif
+            @endisset
+            @isset($post)
+            @if($post->category->id == $categoryObj->id)
+            selected
         @endif
         @endisset
     >

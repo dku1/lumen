@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\PostController as AdminPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,7 @@ Route::group([
     Route::get('/', 'MainController')->name('main');
 
     Route::resource('categories', AdminCategoryController::class);
+
+    Route::resource('posts', AdminPostController::class);
 
 });

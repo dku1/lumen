@@ -40,11 +40,17 @@
                         @csrf
                         <div class="card-body p-0">
                             <div class="form-group">
+                                @error('title')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <label>Название</label>
                                 <input class="form-control" type="text" name="title"
-                                       placeholder="Введите название категории" value="{{ $category->title ?? '' }}">
+                                       placeholder="Введите название категории" value="{{ $category->title ?? old('title') }}">
                             </div>
                             <div class="form-group">
+                                @error('parent_id')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <label>Родительская категория</label>
                                 <select class="form-control select2bs4 select2-accessible" name="parent_id"
                                         style="width: 100%;"
@@ -54,7 +60,7 @@
                                 </select>
 
                             </div>
-                            <div class="text-right">
+                            <div class="text-left">
                                 <button type="submit" class="btn btn-success">Сохранить</button>
                             </div>
                         </div>

@@ -28,4 +28,12 @@ class CategoryRequest extends FormRequest
             'parent_id' => 'required|integer',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'title.required' => 'Добавьте название',
+            'parent_id.required' => 'Выберите родительскую категорию',
+        ];
+    }
 }

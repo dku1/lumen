@@ -26,7 +26,7 @@
                     <!-- small box -->
                     <div class="small-box bg-info">
                         <div class="inner">
-                            <h3>0</h3>
+                            <h3>{{ $postsCount  }}</h3>
 
                             <p>Всего постов</p>
                         </div>
@@ -39,7 +39,7 @@
                                     d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
                             </svg>
                         </div>
-                        <a href="#" class="small-box-footer">Просмотр <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('admin.posts.index') }}" class="small-box-footer">Просмотр <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
