@@ -55,7 +55,7 @@
                                 </tr>
                                 <tr>
                                     <td>Опубликован</td>
-                                    <td>{{ $post->created_at->format('d-m-Y') }}</td>
+                                    <td>{{ $post->created_at->translatedFormat('F d, Y') }}</td>
                                 </tr>
                                 <tr>
                                     <td>Комментариев</td>

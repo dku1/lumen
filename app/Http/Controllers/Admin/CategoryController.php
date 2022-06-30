@@ -39,7 +39,7 @@ class CategoryController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        $categories = $this->service->getMainCategories();
+        $categories = Category::getMainCategories();
         $delimiter = '-';
         return view('admin.category.form', compact('categories', 'delimiter'));
     }
@@ -76,7 +76,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category): View|Factory|Application
     {
-        $categories = $this->service->getMainCategories();
+        $categories = Category::getMainCategories();
         $delimiter = '-';
         return view('admin.category.form', compact('category','categories', 'delimiter'));
     }

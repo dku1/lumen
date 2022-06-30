@@ -70,8 +70,8 @@
                                             Главная категория
                                         @endisset
                                     </td>
-                                    <td>0</td>
-                                    <td>{{ $category->created_at->translatedFormat('F d/Y') }}</td>
+                                    <td>{{ $category->posts->count() }}</td>
+                                    <td>{{ $category->created_at->translatedFormat('F d, Y') }}</td>
                                 </tr>
                                 </tbody>
                             </table>

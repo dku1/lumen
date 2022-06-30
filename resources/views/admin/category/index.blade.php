@@ -56,8 +56,8 @@
                                                 Главная категория
                                             @endisset
                                         </td>
-                                        <td>POSTS</td>
-                                        <td>{{ $category->created_at->translatedFormat('F d/Y') }}</td>
+                                        <td>{{ $category->posts->count() }}</td>
+                                        <td>{{ $category->created_at->translatedFormat('F d, Y') }}</td>
                                         <td class="pt-1">
                                             <form action="{{ route('admin.categories.destroy', $category) }}"
                                                   method="post">

@@ -48,7 +48,7 @@
                                         <td><a href="{{ route('admin.posts.show', $post) }}"
                                                class="text-dark">{{ $post->title }}</a></td>
                                         <td><a href="{{ route('admin.categories.show', $post->category) }}" class="text-dark">{{ $post->category->title }}</a></td>
-                                        <td>{{ $post->created_at->translatedFormat('F d/Y') }}</td>
+                                        <td>{{ $post->created_at->translatedFormat('F d, Y') }}</td>
                                         <td class="pt-1">
                                             <form action="{{ route('admin.posts.destroy', $post) }}"
                                                   method="post">

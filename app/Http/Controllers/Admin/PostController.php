@@ -6,17 +6,22 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
-use App\Services\Admin\CategoryService;
+use App\Services\Admin\PostService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+
+    public PostService $service;
+
+    public function __construct(PostService $service)
+    {
+        $this->service = $service;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -34,9 +39,9 @@ class PostController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function create(CategoryService $service): Application|Factory|View
+    public function create(): Application|Factory|View
     {
-        $categories = $service->getMainCategories();
+        $categories = Category::getMainCategories();
         $delimiter = '';
         return view('admin.post.form', compact('categories', 'delimiter'));
     }
@@ -49,9 +54,7 @@ class PostController extends Controller
      */
     public function store(PostRequest $request): RedirectResponse
     {
-        $data = $request->validated();
-        $data['preview_image'] = $request->file('preview_image')->store('/images/posts/preview_images', 'public');
-        $data['main_image'] = $request->file('main_image')->store('/images/posts/main_images', 'public');
+        $data = $this->service->store($request->validated());
         Post::create($data);
         session()->flash('success', 'Пост сохранён');
         return redirect()->route('admin.posts.index');
@@ -74,11 +77,11 @@ class PostController extends Controller
      * @param Post $post
      * @return Application|Factory|View
      */
-    public function edit(Post $post, CategoryService $service): View|Factory|Application
+    public function edit(Post $post): View|Factory|Application
     {
-        $categories = $service->getMainCategories();
+        $categories = Category::getMainCategories();
         $delimiter = '';
-        return view('admin.post.form', compact('post','categories', 'delimiter'));
+        return view('admin.post.form', compact('post', 'categories', 'delimiter'));
     }
 
     /**
@@ -90,15 +93,7 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post): RedirectResponse
     {
-        $data = $request->validated();
-        if ($request->hasFile('preview_image')){
-            Storage::disk('public')->delete($post->preview_image);
-            $data['preview_image'] = $request->file('preview_image')->store('/images/posts/preview_images', 'public');
-        }
-        if ($request->hasFile('main_image')){
-            Storage::disk('public')->delete($post->main_image);
-            $data['main_image'] = $request->file('main_image')->store('/images/posts/main_images', 'public');
-        }
+        $data = $this->service->update($request->validated(), $post);
         $post->update($data);
         session()->flash('success', 'Пост изменён');
         return redirect()->route('admin.posts.show', $post);
