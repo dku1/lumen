@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\TagController as AdminTagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +31,7 @@ Route::group([
     Route::resource('categories', AdminCategoryController::class);
 
     Route::resource('posts', AdminPostController::class);
+
+    Route::resource('tags', AdminTagController::class)->except(['show']);
 
 });
