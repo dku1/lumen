@@ -29,6 +29,8 @@ class PostRequest extends FormRequest
             'content' => 'required',
             'preview_image' => 'image:jpg, jpeg, png',
             'main_image' => 'image:jpg, jpeg, png',
+            'tag_ids' => 'nullable|array',
+            'tag_ids.*' => 'nullable|integer|exists:tags,id',
         ];
 
         if ($this->path() == 'admin/posts') {

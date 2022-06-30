@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PostRequest;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Services\Admin\PostService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -43,7 +44,8 @@ class PostController extends Controller
     {
         $categories = Category::getMainCategories();
         $delimiter = '';
-        return view('admin.post.form', compact('categories', 'delimiter'));
+        $tags = Tag::all();
+        return view('admin.post.form', compact('categories', 'delimiter', 'tags'));
     }
 
     /**
@@ -54,8 +56,7 @@ class PostController extends Controller
      */
     public function store(PostRequest $request): RedirectResponse
     {
-        $data = $this->service->store($request->validated());
-        Post::create($data);
+        $this->service->store($request->validated());
         session()->flash('success', 'Пост сохранён');
         return redirect()->route('admin.posts.index');
     }
@@ -81,7 +82,8 @@ class PostController extends Controller
     {
         $categories = Category::getMainCategories();
         $delimiter = '';
-        return view('admin.post.form', compact('post', 'categories', 'delimiter'));
+        $tags = Tag::all();
+        return view('admin.post.form', compact(['post', 'categories', 'delimiter', 'tags']));
     }
 
     /**
@@ -93,8 +95,7 @@ class PostController extends Controller
      */
     public function update(PostRequest $request, Post $post): RedirectResponse
     {
-        $data = $this->service->update($request->validated(), $post);
-        $post->update($data);
+        $this->service->update($request->validated(), $post);
         session()->flash('success', 'Пост изменён');
         return redirect()->route('admin.posts.show', $post);
     }

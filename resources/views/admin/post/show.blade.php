@@ -67,7 +67,17 @@
                                 </tr>
                                 <tr>
                                     <td>Тэги</td>
-                                    <td>0</td>
+                                    <td>
+                                        <select class="select2" multiple="multiple" name="tag_ids[]"
+                                                style="width: 100%;" data-select2-id="23" tabindex="-1"
+                                                aria-hidden="true">
+                                            @foreach($post->tags as $tag)
+                                                <option value="{{ $tag->id }}" selected>
+                                                    {{ $tag->title }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>

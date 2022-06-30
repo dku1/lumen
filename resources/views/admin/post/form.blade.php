@@ -47,17 +47,38 @@
                                 <input class="form-control" type="text" name="title"
                                        placeholder="Введите название поста" value="{{ $post->title ?? old('title') }}">
                             </div>
-                            <div class="form-group">
-                                @error('category_id')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                                <label>Категория</label>
-                                <select class="form-control select2bs4 select2-accessible" name="category_id"
-                                        style="width: 100%;"
-                                        data-select2-id="17" tabindex="-1" aria-hidden="true">
-                                    @include('admin.layouts.sub-layouts.category-options')
-                                </select>
+                            <div class="row d-flex" style="width: 990px">
+                                <div class="form-group col-5">
+                                    @error('category_id')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                    <label>Категория</label>
+                                    <select class="form-control select2bs4 select2-accessible" name="category_id"
+                                            style="width: 100%;"
+                                            data-select2-id="17" tabindex="-1" aria-hidden="true">
+                                        @include('admin.layouts.sub-layouts.category-options')
+                                    </select>
+                                </div>
+                                <div class="form-group col-7 d-flex flex-column" data-select2-id="43">
+                                    <label>Тэги</label>
+                                    <select class="select2" multiple="multiple" name="tag_ids[]"
+                                            data-placeholder="Выберите тэги"
+                                            style="width: 87%;" data-select2-id="23" tabindex="-1" aria-hidden="true">
+                                        @foreach($tags as $tag)
+                                            <option value="{{ $tag->id }}"
+                                                    @if(isset($post) and in_array($tag->id, $post->tags->pluck('id')->toArray()))
+                                                    selected
+                                                    @elseif(is_array(old('tag_ids')) and  in_array($tag->id,old('tag_ids')))
+                                                    selected
+                                                @endif>
+                                                {{ $tag->title }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
+
+
                             <div class="form-group mt-3">
                                 @error('content')
                                 <div class="alert alert-danger">{{ $message }}</div>
