@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            @include('admin.layouts.sub-layouts.sidebar-menu')
+            @include('admin.layouts.sub-layouts.admin-menu')
 
         </div>
         <!-- /.sidebar -->
