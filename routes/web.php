@@ -17,12 +17,16 @@ use App\Http\Controllers\Admin\TagController as AdminTagController;
 |
 */
 
-Route::get('/', [MainController::class, 'index']);
+Route::get('/', [MainController::class, 'index'])->name('index');
 
 Route::group([
     'namespace' => 'App\Http\Controllers\Admin',
     'prefix' => 'admin',
     'as' => 'admin.',
+    'middleware' => [
+        'auth',
+        'is.admin',
+    ],
 ], function () {
 
     Route::get('/', 'MainController')->name('main');

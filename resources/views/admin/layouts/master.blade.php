@@ -38,7 +38,7 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item mr-3">
-                <a href="#" class="btn btn-primary">Вернуться на сайт</a>
+                <a href="{{ route('index') }}" class="btn btn-primary">Вернуться на сайт</a>
             </li>
             <li class="nav-item mr-1">
                 <a href="#" class="btn btn-danger">Выход</a>
@@ -59,7 +59,7 @@
             <!-- Sidebar user panel (optional) -->
             <div class="user-panel mt-3 pb-3 mb-3 d-flex flex-column text-secondary">
                 <div class="info text-center">
-                    <span>Alexander Pierce</span>
+                    <span>{{ auth()->user()->login }}</span>
                 </div>
             </div>
         @include('admin.layouts.sub-layouts.session-flash')

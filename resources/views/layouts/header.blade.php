@@ -19,7 +19,6 @@
                     <a class="btn btn-sm btn-outline-secondary" href="{{ route('login') }}" style="margin-right: 10px">Вход</a>
                     <a class="btn btn-sm btn-outline-secondary" href="{{ route('register') }}">Регистрация</a>
                 @endauth
-
             </div>
         </div>
     </header>
@@ -31,8 +30,13 @@
             <a class="p-2 link-secondary" href="#">Популярное</a>
             <a class="p-2 link-secondary" href="#">Публикации недели</a>
             <a class="p-2 link-secondary" href="#">Самое обсуждаемое</a>
-            <a class="p-2 link-secondary" href="#">Личный кабинет</a>
             <a class="p-2 link-secondary" href="#">Связаться с нами</a>
+            <a class="p-2 link-secondary" href="#">Личный кабинет</a>
+            @auth()
+                @if(auth()->user()->isAdmin())
+                    <a class="p-2 link-secondary" href="{{ route('admin.main') }}">Панель управления</a>
+                @endif
+            @endauth
         </nav>
     </div>
 </div>
