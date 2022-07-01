@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
@@ -16,15 +17,13 @@ use App\Http\Controllers\Admin\TagController as AdminTagController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [MainController::class, 'index']);
 
 Route::group([
     'namespace' => 'App\Http\Controllers\Admin',
     'prefix' => 'admin',
     'as' => 'admin.',
-], function (){
+], function () {
 
     Route::get('/', 'MainController')->name('main');
 
@@ -35,3 +34,5 @@ Route::group([
     Route::resource('tags', AdminTagController::class)->except(['show']);
 
 });
+
+require __DIR__ . '/auth.php';
