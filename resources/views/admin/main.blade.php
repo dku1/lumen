@@ -68,7 +68,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>0</h3>
+                            <h3>{{ $readersCount }}</h3>
 
                             <p>Читателей</p>
                         </div>
@@ -80,7 +80,7 @@
                                       d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
                             </svg>
                         </div>
-                        <a href="#" class="small-box-footer">Просмотр <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('admin.users.index') }}" class="small-box-footer">Просмотр <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->

@@ -5,6 +5,7 @@
     <title>@yield('title')</title>
     <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
