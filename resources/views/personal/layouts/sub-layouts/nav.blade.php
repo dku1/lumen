@@ -2,7 +2,7 @@
     <div class="position-sticky pt-3">
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
+                <a class="nav-link @if(request()->routeIs('personal.index')) active @endif" aria-current="page" href="{{ route('personal.index') }}">
                     <span data-feather="home" class="align-text-bottom"></span>
                     Главная
                 </a>
@@ -14,7 +14,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('personal.comments') }}">
+                <a class="nav-link @if(request()->routeIs('personal.comments') or request()->routeIs('comments.edit')) active @endif" href="{{ route('personal.comments') }}">
                     <span data-feather="shopping-cart" class="align-text-bottom"></span>
                     Комментарии
                 </a>

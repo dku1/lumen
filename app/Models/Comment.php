@@ -27,4 +27,9 @@ class Comment extends Model
         return self::where('user_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
     }
 
+    public function isAvailable(): bool
+    {
+        return $this->user_id === auth()->user()->id;
+    }
+
 }

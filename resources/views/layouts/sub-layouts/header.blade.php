@@ -3,7 +3,7 @@
         <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1">
                 @auth()
-                <a class="link-secondary" href="#">{{ auth()->user()->login }}</a>
+                <a class="link-secondary" href="{{ route('personal.index') }}">{{ auth()->user()->login }}</a>
                 @endauth
             </div>
             <div class="col-4 text-center">
@@ -25,7 +25,7 @@
 
     <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
-            <a class="p-2 link-secondary" href="#">Главная</a>
+            <a class="p-2 link-secondary" href="{{ route('index') }}">Главная</a>
             <a class="p-2 link-secondary" href="#">Категории</a>
             <a class="p-2 link-secondary" href="#">Популярное</a>
             <a class="p-2 link-secondary" href="#">Публикации недели</a>

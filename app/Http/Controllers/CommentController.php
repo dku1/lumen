@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Services\CommentService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -12,6 +13,13 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    public CommentService $service;
+
+    public function __construct(CommentService $service)
+    {
+        $this->service = $service;
+    }
+
     public function store(Request $request, Post $post): RedirectResponse
     {
         Comment::create([
@@ -28,19 +36,15 @@ class CommentController extends Controller
         return view('personal.comment-form', compact('comment'));
     }
 
-    public function update(Request $request, Comment $comment)
+    public function update(Request $request, Comment $comment): RedirectResponse
     {
-        if ($comment->user_id === auth()->user()->id) {
-            $comment->update(['message' => $request->message]);
-        }
+        $this->service->update($request, $comment);
         return redirect()->route('post', $comment->post);
     }
 
     public function delete(Comment $comment): RedirectResponse
     {
-        if ($comment->user_id === auth()->user()->id) {
-            $comment->delete();
-        }
+        $this->service->delete($comment);
         return redirect()->back();
     }
 }
