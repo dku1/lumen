@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\PersonalController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
@@ -18,6 +19,15 @@ use App\Http\Controllers\Admin\TagController as AdminTagController;
 */
 
 Route::get('/', [MainController::class, 'index'])->name('index');
+Route::get('post{post}', [MainController::class, 'post'])->name('post');
+
+Route::group([
+    'prefix' => 'personal',
+    'as' => 'personal.',
+    'middleware' => ['auth'],
+    ], function (){
+    Route::get('/', [PersonalController::class, 'index'])->name('index');
+});
 
 Route::group([
     'namespace' => 'App\Http\Controllers\Admin',

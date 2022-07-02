@@ -41,7 +41,10 @@
                 <a href="{{ route('index') }}" class="btn btn-primary">Вернуться на сайт</a>
             </li>
             <li class="nav-item mr-1">
-                <a href="#" class="btn btn-danger">Выход</a>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button class="btn btn-danger">Выход</button>
+                </form>
             </li>
         </ul>
     </nav>
@@ -50,7 +53,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link text-center">
+        <a href="{{ route('admin.main') }}" class="brand-link text-center">
             <span class="font-weight-light text-center">Lumen</span>
         </a>
 

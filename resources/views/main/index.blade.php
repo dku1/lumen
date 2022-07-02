@@ -44,7 +44,7 @@
                 <div class="card mb-3">
                     <img src="{{ asset('storage/' . $post->preview_image ) }}" class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title"><a href="#" class="text-dark">{{ $post->title }}</a></h5>
+                        <h5 class="card-title"><a href="{{ route('post', $post) }}" class="text-dark">{{ $post->title }}</a></h5>
                         <p class="card-text">
                             {{ $post->category->title }}
                         </p>

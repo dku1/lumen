@@ -31,7 +31,7 @@
             <a class="p-2 link-secondary" href="#">Публикации недели</a>
             <a class="p-2 link-secondary" href="#">Самое обсуждаемое</a>
             <a class="p-2 link-secondary" href="#">Связаться с нами</a>
-            <a class="p-2 link-secondary" href="#">Личный кабинет</a>
+            <a class="p-2 link-secondary" href="{{ route('personal.index') }}">Личный кабинет</a>
             @auth()
                 @if(auth()->user()->isAdmin())
                     <a class="p-2 link-secondary" href="{{ route('admin.main') }}">Панель управления</a>

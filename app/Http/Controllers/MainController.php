@@ -14,4 +14,9 @@ class MainController extends Controller
         $posts = Post::orderBy('created_at', 'desc')->paginate(10);
         return view('main.index', compact('posts'));
     }
+
+    public function post(Post $post)
+    {
+        return view('main.post', compact('post'));
+    }
 }

@@ -4,7 +4,8 @@
     <meta charset="utf-8">
     <title>@yield('title')</title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/personal/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+
     <style>
         .bd-placeholder-img {
             font-size: 1.125rem;
@@ -57,21 +58,41 @@
             -webkit-overflow-scrolling: touch;
         }
     </style>
+
     <!-- Custom styles for this template -->
-    <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="/css/blog.css" rel="stylesheet">
+    <link href="/css/personal/dashboard.css" rel="stylesheet">
 </head>
 <body>
 
-@include('layouts.sub-layouts.header')
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#"
+       style="pointer-events: none">{{ auth()->user()->login }}</a>
+    <div class="d-flex">
+        <div class="navbar-nav">
+            <div class="nav-item">
+                <a class="nav-link px-3" href="{{ route('index') }}">Вернуться на сайт</a>
+            </div>
+        </div>
+        <div class="navbar-nav">
+            <div class="nav-item">
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button class="btn btn-danger">Выход</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
-<main class="container">
-    @yield('content')
-</main>
+</header>
 
-@include('layouts.sub-layouts.footer')
+<div class="container-fluid">
+    <div class="row">
+        @include('personal.layouts.sub-layouts.nav')
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-4">
+            @yield('content')
+        </main>
+    </div>
+</div>
 
 </body>
 </html>
-
