@@ -17,6 +17,7 @@ class MainController extends Controller
 
     public function post(Post $post)
     {
-        return view('main.post', compact('post'));
+        $comments = $post->comments()->orderBy('created_at', 'desc')->get();
+        return view('main.post', compact('post', 'comments'));
     }
 }

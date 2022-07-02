@@ -12,7 +12,7 @@
         </div>
         <div class="col-12 d-flex justify-content-between m-auto">
             <div class="mt-5">
-                    {{ $post->category->title }}
+                {{ $post->category->title }}
             </div>
             <div class="col-1 mt-5 mb-3 d-flex justify-content-end">
                 <a href="" class="text-danger" style="margin-right: 40px">
@@ -22,6 +22,9 @@
                               d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                     </svg>
                 </a>
+                <span style="margin-right: 5px">
+                  {{ $post->comments->count() }}
+              </span>
                 <a href="" class="text-secondary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                          class="bi bi-chat-dots ml-3" viewBox="0 0 16 16">
@@ -42,17 +45,77 @@
                 {{ $post->created_at->translatedFormat('H:i') }}
             </span>
         </div>
-        <div class="col-12 mt-5">
+        <div class="col-12 mt-5 mb-4">
             {!! $post->content !!}
         </div>
-        <select class="select2" multiple="multiple" name="tag_ids[]"
-                style="width: 100%;" data-select2-id="23" tabindex="-1"
-                aria-hidden="true">
-            @foreach($post->tags as $tag)
-                <option value="{{ $tag->id }}" selected>
-                    {{ $tag->title }}
-                </option>
-            @endforeach
-        </select>
+        @if($post->tags->count() !== 0)
+            <select class="select2" multiple="multiple" name="tag_ids[]"
+                    style="width: 100%;" data-select2-id="23" tabindex="-1"
+                    aria-hidden="true">
+                @foreach($post->tags as $tag)
+                    <option value="{{ $tag->id }}" selected>
+                        {{ $tag->title }}
+                    </option>
+                @endforeach
+            </select>
+        @endif
     </div>
+
+    <section class="comment">
+        <div class="container">
+            <div class="col-12">
+                <h4 class="text-center mt-5">Комментарии</h4>
+                @auth()
+                    <form action="{{ route('comments.store', $post) }}" method="post">
+                        @csrf
+                        <div class="mb-3 mt-5">
+                            <div class="form-group">
+                                <label class="form-label">Оставить комментарий</label>
+                                <textarea class="form-control" rows="3" name="message"></textarea>
+                            </div>
+                            <div class="form-group text-right mt-2">
+                                <button class="btn btn-primary text-right">Отправить</button>
+                            </div>
+                        </div>
+                    </form>
+                @endauth
+            </div>
+            @if($comments->count() != 0)
+                <div class="card-footer card-comments mt-5 mb-5">
+                    @foreach($comments as $comment)
+                        <div class="card-comment mt-5">
+                            <div class="comment-text">
+                                <div class="username d-flex justify-content-between">
+                                    {{ $comment->user->login }}
+                                    @if($comment->user_id == auth()->user()->id)
+                                        <div class="d-flex">
+                                            <a href="{{ route('comments.edit', $comment) }}" class="text-warning" style="margin-right: 20px">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                                                </svg>
+                                            </a>
+                                            <form action="{{ route('comments.delete', $comment) }}" method="post">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="border-0 bg-transparent text-danger">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                         fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                        <path
+                                                            d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z"/>
+                                                    </svg>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    @endif
+                                </div>
+                                <span class="text-muted float-right">{{ $comment->created_at->diffForHumans() }}</span>
+                                <p class="mt-3"> {{ $comment->message }}</p>
+                            </div>
+                            <hr>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+        </div>
+    </section>
 @endsection

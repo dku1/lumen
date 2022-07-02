@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\PersonalController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
@@ -19,7 +20,19 @@ use App\Http\Controllers\Admin\TagController as AdminTagController;
 */
 
 Route::get('/', [MainController::class, 'index'])->name('index');
+
 Route::get('post{post}', [MainController::class, 'post'])->name('post');
+
+Route::group([
+    'prefix' => 'comments',
+    'as' => 'comments.',
+    'middleware' => ['auth'],
+], function (){
+   Route::post('{post}', [CommentController::class, 'store'])->name('store');
+   Route::get('edit/{comment}', [CommentController::class, 'edit'])->name('edit');
+   Route::patch('update/{comment}', [CommentController::class, 'update'])->name('update');
+   Route::delete('delete/{comment}', [CommentController::class, 'delete'])->name('delete');
+});
 
 Route::group([
     'prefix' => 'personal',
@@ -27,6 +40,7 @@ Route::group([
     'middleware' => ['auth'],
     ], function (){
     Route::get('/', [PersonalController::class, 'index'])->name('index');
+    Route::get('comments', [PersonalController::class, 'comments'])->name('comments');
 });
 
 Route::group([

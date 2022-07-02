@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>@yield('title')</title>
-
+    <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .bd-placeholder-img {
@@ -61,6 +61,7 @@
     <link href="https://fonts.googleapis.com/css?family=Playfair&#43;Display:700,900&amp;display=swap" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="/css/blog.css" rel="stylesheet">
+
 </head>
 <body>
 
@@ -72,6 +73,11 @@
 
 @include('layouts.sub-layouts.footer')
 
+<script src="/plugins/jquery/jquery.min.js"></script>
+<script src="/plugins/select2/js/select2.full.min.js"></script>
+<script>
+    $('.select2').select2()
+</script>
 </body>
 </html>
 
