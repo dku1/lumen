@@ -59,7 +59,7 @@
                                 </tr>
                                 <tr>
                                     <td>Комментариев</td>
-                                    <td>0</td>
+                                    <td>{{ $post->comments->count() }}</td>
                                 </tr>
                                 <tr>
                                     <td>Лайков</td>
@@ -92,7 +92,21 @@
                 </div>
                 <div class="col-7">
                     {!! $post->content  !!}
+                        @foreach($post->comments()->orderBy('created_at', 'desc')->get() as $comment)
+                        <div class="direct-chat-msg d-flex">
+                            <div class="direct-chat-infos mt-2">
+                                <span class="direct-chat-name float-left">{{ $comment->user->login }}</span>
+                            </div>
+                            <div class="direct-chat-text">
+                                {{ $comment->message }}
+                                <span class="direct-chat-timestamp float-right ml-5">{{ $comment->created_at->translatedFormat('d F H:i') }}</span>
+                            </div>
+                        </div>
+                        @endforeach
                 </div>
+
+
+
             </div>
         </div>
     </section>

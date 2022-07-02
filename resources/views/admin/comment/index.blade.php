@@ -1,13 +1,13 @@
 @extends('admin.layouts.master')
 
-@section('title', 'Lumen | Admin panel | Тэги')
+@section('title', 'Lumen | Admin panel | Комментарии')
 
 @section('content')
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Тэги</h1>
+                    <h1 class="m-0">Комментарии</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -22,47 +22,39 @@
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-12">
-                    <a href="{{ route('admin.tags.create') }}" class="btn btn-success">Создать</a>
-                </div>
-                <div class="col-8 mt-3">
+                <div class="col-12 mt-3">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title ml-1">{{ $tags->count() }} тэгов</h3>
+                            <h3 class="card-title ml-1">{{ $comments->count() }} комментариев</h3>
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered table-hover text-center">
                                 <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Название</th>
-                                    <th>Кол-во постов</th>
-                                    <th>Создан</th>
-                                    <th>Действия</th>
+                                    <th>Пост</th>
+                                    <th>Комментарий</th>
+                                    <th>Пользователь</th>
+                                    <th>Время</th>
+                                    <th>Дата</th>
+                                    <th>Удалить</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($tags as $tag)
+                                @foreach($comments as $comment)
                                     <tr data-widget="expandable-table" aria-expanded="false">
-                                        <td>{{ $tag->id }}</td>
-                                        <td class="text-left">{{ $tag->title }}</td>
-                                        <td>{{ $tag->posts->count() }}</td>
-                                        <td>{{ $tag->created_at->translatedFormat('F d, Y') }}</td>
+                                        <td>{{ $comment->id }}</td>
+                                        <td class="text-left"><a href="{{ route('admin.posts.show', $comment->post) }}" class="text-dark">{{ $comment->post->title }}</a></td>
+                                        <td class="text-left">{{ $comment->message }}</td>
+                                        <td>{{ $comment->user->login }}</td>
+                                        <td>{{ $comment->created_at->translatedFormat('H:i') }}</td>
+                                        <td>{{ $comment->created_at->translatedFormat('F d, Y') }}</td>
                                         <td class="pt-1">
-                                            <form action="{{ route('admin.tags.destroy', $tag) }}"
+                                            <form action="{{ route('admin.comments.delete', $comment) }}"
                                                   method="post">
                                                 @method('DELETE')
                                                 @csrf
-                                                <a href="{{ route('admin.tags.edit', $tag) }}"
-                                                   class="btn text-warning">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                         fill="currentColor" class="bi bi-pencil-fill"
-                                                         viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
-                                                    </svg>
-                                                </a>
-                                                <button class="btn border-0 bg-transparent text-danger">
+                                                <button class=" border-0 bg-transparent text-danger">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                          fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                                                         <path
@@ -78,7 +70,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center paginate">
-                        {{ $tags->links('pagination::bootstrap-4') }}
+                        {{ $comments->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>

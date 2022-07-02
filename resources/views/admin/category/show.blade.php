@@ -42,7 +42,7 @@
         <div class="container-fluid">
             <!-- Small boxes (Stat box) -->
             <div class="row">
-                <div class="col-6 mt-3">
+                <div class="col-12 mt-3">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title ml-1">{{ $category->title }}</h3>
@@ -79,7 +79,7 @@
                     </div>
                 </div>
                 @if($category->children->count() !== 0)
-                    <div class="col-6 mt-3">
+                    <div class="col-8 m-auto mt-3">
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title ml-1">Подкатегории: {{ $category->children->count() }}</h3>
@@ -90,6 +90,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Название</th>
+                                        <th>Постов</th>
                                         <th>Действия</th>
                                     </tr>
                                     </thead>
@@ -97,7 +98,8 @@
                                     @foreach($category->children as $children)
                                         <tr style="height: 58px">
                                             <td>{{ $children->id }}</td>
-                                            <td><a href="{{ route('admin.categories.show', $children) }}" class="text-dark">{{ $children->title }}</a></td>
+                                            <td class="text-left"><a href="{{ route('admin.categories.show', $children) }}" class="text-dark">{{ $children->title }}</a></td>
+                                            <td>{{ $children->posts->count() }}</td>
                                             <td class="pt-1">
                                                 <form action="{{ route('admin.categories.destroy', $children) }}"
                                                       method="post">

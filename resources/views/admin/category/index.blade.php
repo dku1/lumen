@@ -25,7 +25,7 @@
                 <div class="col-12">
                     <a href="{{ route('admin.categories.create') }}" class="btn btn-success">Создать</a>
                 </div>
-                <div class="col-8 mt-3">
+                <div class="col-12 mt-3">
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title ml-1">{{ $totalCount }} категорий</h3>
@@ -46,7 +46,7 @@
                                 @foreach($categories as $category)
                                     <tr data-widget="expandable-table" aria-expanded="false">
                                         <td>{{ $category->id }}</td>
-                                        <td><a href="{{ route('admin.categories.show', $category) }}"
+                                        <td class="text-left"><a href="{{ route('admin.categories.show', $category) }}"
                                                class="text-dark">{{ $category->title }}</a></td>
                                         <td>
                                             @isset($category->parent->title)
