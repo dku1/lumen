@@ -40,36 +40,52 @@
             </h3>
 
             @foreach($posts as $post)
-            <article class="blog-post">
-                <div class="card mb-3">
-                    <img src="{{ asset('storage/' . $post->preview_image ) }}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title"><a href="{{ route('post', $post) }}" class="text-dark">{{ $post->title }}</a></h5>
-                        <p class="card-text">
-                            {{ $post->category->title }}
-                        </p>
-                        <hr>
-                        <div class="d-flex justify-content-between">
-                            <p class="card-text"><small class="text-muted">{{ $post->created_at->translatedFormat('F d, Y H:i') }}</small></p>
-                            <div class="mt-1 d-flex justify-content-between" style="width: 70px">
-                                <a href="#" class="text-danger">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                                    </svg>
-                                </a>
-                                {{ $post->comments->count() }}
-                                <a class="text-secondary" style="pointer-events: none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
-                                        <path d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                                        <path d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2z"/>
-                                    </svg>
-                                </a>
-
+                <article class="blog-post">
+                    <div class="card mb-3">
+                        <img src="{{ asset('storage/' . $post->preview_image ) }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title"><a href="{{ route('post', $post) }}"
+                                                      class="text-dark">{{ $post->title }}</a></h5>
+                            <p class="card-text">
+                                {{ $post->category->title }}
+                            </p>
+                            <hr>
+                            <div class="d-flex justify-content-between">
+                                <p class="card-text"><small
+                                        class="text-muted">{{ $post->created_at->translatedFormat('F d, Y H:i') }}</small>
+                                </p>
+                                <div class="mt-1 d-flex justify-content-between" style="width: 70px">
+                                    {{ $post->likes->count() }}
+                                    <a href="{{ route('liked', $post) }}"
+                                       @if(auth()->check() and $post->likes->contains(auth()->user()))
+                                       class="text-danger"
+                                       @else
+                                       class="text-dark"
+                                       @endif
+                                       @if(!auth()->check())
+                                       style="pointer-events: none"
+                                        @endif>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                             fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                        </svg>
+                                    </a>
+                                    {{ $post->comments->count() }}
+                                    <a class="text-secondary" style="pointer-events: none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                             fill="currentColor" class="bi bi-chat-dots" viewBox="0 0 16 16">
+                                            <path
+                                                d="M5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                            <path
+                                                d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2z"/>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </article>
+                </article>
             @endforeach
             <div class="d-flex justify-content-center paginate">
                 {{ $posts->links('pagination::bootstrap-4') }}
@@ -83,7 +99,7 @@
                     <div class="links d-flex justify-content-between mt-4">
                         <a href="#" class="text-dark">
                             <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                        class="bi bi-telegram" viewBox="0 0 16 16">
+                                 class="bi bi-telegram" viewBox="0 0 16 16">
                                 <path
                                     d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
                             </svg>

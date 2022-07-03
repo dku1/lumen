@@ -7,8 +7,9 @@
     <div class="col-12">
         <p>Email: {{ auth()->user()->email }}</p>
         <p>Логин: {{ auth()->user()->login }}</p>
+        <p>Лайков: {{ auth()->user()->likes->count() }}</p>
         <p>Комментариев: {{ auth()->user()->comments->count() }}</p>
-        <p>Дата регистрации: {{ auth()->user()->created_at->format('m-d, Y H:i') }}</p>
+        <p>Дата регистрации: {{ auth()->user()->created_at->format('m-d, Y') }}</p>
         <p><a href="#" class="btn btn-dark">Редактировать</a></p>
     </div>
 </div>

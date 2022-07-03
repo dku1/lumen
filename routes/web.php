@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\CommentController as AdminCommentController;
+use App\Http\Controllers\LikedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,8 @@ Route::group([
    Route::patch('update/{comment}', [CommentController::class, 'update'])->name('update');
    Route::delete('delete/{comment}', [CommentController::class, 'delete'])->name('delete');
 });
+
+Route::get('liked/{post}', [LikedController::class, 'liked'])->name('liked')->middleware('auth');
 
 Route::group([
     'prefix' => 'personal',
