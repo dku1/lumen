@@ -3,48 +3,22 @@
 @section('title', 'Lumen')
 
 @section('content')
-    <div class="col-12">
+    <div class="col-12 mb-3">
         <img src="{{ asset('storage/' . '/images/title.jpg') }}"
              alt="Изображение недоступно" style="width: 100%; height: 100%">
     </div>
 
-    <div class="row mb-2 mt-3">
-        <div class="col-md-6">
-            <div class="card bg-dark text-white">
-                <img
-                    src="{{ asset('storage/' . '/images/posts/main_images/JnVJwjzNNqcHLuQsTebXliqIRlUWUtHo7dND0JVd.jpg') }}"
-                    class="card-img" alt="...">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Last updated 3 mins ago</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card bg-dark text-white">
-                <img
-                    src="{{ asset('storage/' . '/images/posts/preview_images/wzdPwveRsvdIHJBQVRqVJGy6K9gwdhHDVlVBKwbn.jpg') }}"
-                    class="card-img" alt="...">
-                <div class="card-img-overlay">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Last updated 3 mins ago</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row g-5">
+    <div class="row">
         <div class="col-md-8">
-            <h3 class="pb-4 mb-4 fst-italic border-bottom">
+            <h3 class="pb-3 mb-3 fst-italic border-bottom">
                 Последние публикации
             </h3>
-
             @foreach($posts as $post)
                 <article class="blog-post">
-                    <div class="card mb-3">
+                    <div class="card mb-1">
                         <img src="{{ asset('storage/' . $post->preview_image ) }}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title"><a href="{{ route('post', $post) }}"
+                            <h5 class="card-title mb-3"><a href="{{ route('post', $post) }}"
                                                       class="text-dark">{{ $post->title }}</a></h5>
                             <p class="card-text">
                                 {{ $post->category->title }}
@@ -135,22 +109,21 @@
                     </div>
                 </div>
 
-                <div class="p-4">
-                    <h4 class="fst-italic">Архив публикаций</h4>
-                    <ol class="list-unstyled mb-0">
-                        <li><a href="#" class="text-dark">Январь 2022</a></li>
-                        <li><a href="#" class="text-dark">Фувраль 2022</a></li>
-                        <li><a href="#" class="text-dark">Март 2022</a></li>
-                        <li><a href="#" class="text-dark">Апрель 2022</a></li>
-                        <li><a href="#" class="text-dark">Май 2022</a></li>
-                        <li><a href="#" class="text-dark">Июнь 2022</a></li>
-                        <li><a href="#" class="text-dark">Июль 2022</a></li>
-                        <li><a href="#" class="text-dark">Август 2022</a></li>
-                        <li><a href="#" class="text-dark">Сентябрь 2022</a></li>
-                        <li><a href="#" class="text-dark">Октябрь 2022</a></li>
-                        <li><a href="#" class="text-dark">Ноябрь 2022</a></li>
-                        <li><a href="#" class="text-dark">Декабрь 2022</a></li>
-                    </ol>
+
+
+                <div class="p-1">
+                    <h4 class="fst-italic text-center">Самые популярные</h4>
+
+                    @foreach($popularPosts as $post)
+                    <div class="col-md-12">
+                        <div class="card bg-dark text-white mt-3">
+                            <img
+                                src="{{ asset('storage/' . "$post->preview_image") }}"
+                                class="card-img" alt="Изображение недоступно">
+                        </div>
+                    </div>
+                        <a href="{{ route('post', $post) }}" class="text-dark"><h5 class="text-center">{{ $post->title }}</h5></a>
+                    @endforeach
                 </div>
             </div>
         </div>

@@ -72,11 +72,11 @@
         @endif
     </div>
 
-    <section class="comment">
+    <section class="comment mb-3">
         <div class="container">
             <div class="col-12">
-                <h4 class="text-center mt-5">Комментарии</h4>
                 @auth()
+                    <h4 class="text-center mt-5">Комментарии</h4>
                     <form action="{{ route('comments.store', $post) }}" method="post">
                         @csrf
                         <div class="mb-3 mt-5">

@@ -12,7 +12,8 @@ class MainController extends Controller
     public function index(): Factory|View|Application
     {
         $posts = Post::orderBy('created_at', 'desc')->paginate(10);
-        return view('main.index', compact('posts'));
+        $popularPosts = Post::withCount('likes')->orderBy('likes_count', 'desc')->get()->take(3);
+        return view('main.index', compact('posts', 'popularPosts'));
     }
 
     public function post(Post $post): Factory|View|Application
