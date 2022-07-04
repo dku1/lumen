@@ -15,7 +15,7 @@
                 {{ $post->category->title }}
             </div>
             <div class="col-1 mt-5 mb-3 d-flex justify-content-end">
-                <span style="margin-right: 5px">
+                <span style="margin-right: 15px">
                   {{ $post->likes->count() }}
                 </span>
                 <a href="{{ route('liked', $post) }}"
@@ -25,15 +25,15 @@
                    class="text-dark"
                    @endif
                    @if(!auth()->check())
-                   style="pointer-events: none"
-                    @endif style="margin-right: 10px">
+                   style="pointer-events: none; margin-right: 20px"
+                    @endif>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                          class="bi bi-heart-fill" viewBox="0 0 16 16">
                         <path fill-rule="evenodd"
                               d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
                     </svg>
                 </a>
-                <span style="margin-right: 5px">
+                <span>
                   {{ $post->comments->count() }}
                 </span>
                 <a href="" class="text-secondary">

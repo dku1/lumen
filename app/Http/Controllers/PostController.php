@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -32,5 +33,11 @@ class PostController extends Controller
     {
         $posts = Post::where('created_at', '>=', \Carbon\Carbon::now()->subWeeks(1))->orderBy('created_at', 'desc')->paginate(10);
         return view('post.week', compact('posts'));
+    }
+
+    public function category(Category $category)
+    {
+        $posts = Post::where('category_id', $category->id)->get();
+        return view('post.category', compact('posts', 'category'));
     }
 }

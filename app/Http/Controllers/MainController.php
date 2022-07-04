@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -16,6 +17,12 @@ class MainController extends Controller
         return view('main.index', compact('posts', 'popularPosts'));
     }
 
+    public function categories(): Factory|View|Application
+    {
+        $categories = Category::getMainCategories();
+        $delimiter = '';
+        return view('main.categories', compact('categories', 'delimiter'));
+    }
 
 
 }

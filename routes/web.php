@@ -24,6 +24,7 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', [MainController::class, 'index'])->name('index');
+Route::get('categories', [MainController::class, 'categories'])->name('categories');
 
 
 
@@ -35,6 +36,7 @@ Route::group([
     Route::get('discussed', [PostController::class, 'discussed'])->name('discussed');
     Route::get('top', [PostController::class, 'top'])->name('top');
     Route::get('weeks', [PostController::class, 'week'])->name('week');
+    Route::get('category/{category}', [PostController::class, 'category'])->name('category');
 
 });
 
@@ -59,6 +61,9 @@ Route::group([
     ], function (){
     Route::get('/', [PersonalController::class, 'index'])->name('index');
     Route::get('comments', [PersonalController::class, 'comments'])->name('comments');
+    Route::get('edit', [PersonalController::class, 'edit'])->name('edit');
+    Route::get('liked', [PersonalController::class, 'liked'])->name('liked');
+    Route::patch('update/{user}', [PersonalController::class, 'update'])->name('update');
 });
 
 Route::group([

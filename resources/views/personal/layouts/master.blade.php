@@ -67,7 +67,7 @@
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#"
        style="pointer-events: none">{{ auth()->user()->login }}</a>
-    <div class="d-flex">
+    <div class="d-flex p-1">
         <div class="navbar-nav">
             <div class="nav-item">
                 <a class="nav-link px-3" href="{{ route('index') }}">Вернуться на сайт</a>
@@ -87,6 +87,7 @@
 
 <div class="container-fluid">
     <div class="row">
+        @include('admin.layouts.sub-layouts.session-flash')
         @include('personal.layouts.sub-layouts.nav')
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-4">
             @yield('content')

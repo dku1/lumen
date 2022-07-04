@@ -51,7 +51,7 @@
                                 @error('email')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
-                                <label>Логин</label>
+                                <label>Email</label>
                                 <input class="form-control" type="email" name="email"
                                        placeholder="Введите email" value="{{ $user->email ?? old('email') }}">
                             </div>

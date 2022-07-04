@@ -8,7 +8,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link @if(request()->routeIs('personal.liked') ) active @endif" href="{{ route('personal.liked') }}">
                     <span data-feather="file" class="align-text-bottom"></span>
                     Избранное
                 </a>
