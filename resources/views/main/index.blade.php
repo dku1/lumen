@@ -18,12 +18,11 @@
                     <div class="card mb-1">
                         <img src="{{ asset('storage/' . $post->preview_image ) }}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <h5 class="card-title mb-3"><a href="{{ route('post', $post) }}"
+                            <h5 class="card-title mb-3"><a href="{{ route('posts.show', $post) }}"
                                                       class="text-dark">{{ $post->title }}</a></h5>
                             <p class="card-text">
                                 {{ $post->category->title }}
                             </p>
-                            <hr>
                             <div class="d-flex justify-content-between">
                                 <p class="card-text"><small
                                         class="text-muted">{{ $post->created_at->translatedFormat('F d, Y H:i') }}</small>
@@ -112,17 +111,16 @@
 
 
                 <div class="p-1">
-                    <h4 class="fst-italic text-center">Самые популярные</h4>
-
+                    <h4 class="fst-italic text-center mb-3">Самые популярные</h4>
                     @foreach($popularPosts as $post)
-                    <div class="col-md-12">
-                        <div class="card bg-dark text-white mt-3">
-                            <img
-                                src="{{ asset('storage/' . "$post->preview_image") }}"
-                                class="card-img" alt="Изображение недоступно">
+                        <div class="mb-3">
+                            <a href="{{ route('posts.show', $post) }}" class="d-inline-block">
+                                <h4 class="h6 text-dark">{{ $post->title }}</h4>
+                                <img class="card-img"  src="{{ asset('storage/' . "$post->preview_image") }}" alt="">
+                            </a>
+                            <time class="timeago" datetime="2021-09-03 20:00" timeago-id="8">{{ $post->created_at->diffForHumans() }}</time>
                         </div>
-                    </div>
-                        <a href="{{ route('post', $post) }}" class="text-dark"><h5 class="text-center">{{ $post->title }}</h5></a>
+
                     @endforeach
                 </div>
             </div>

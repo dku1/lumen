@@ -16,9 +16,6 @@ class MainController extends Controller
         return view('main.index', compact('posts', 'popularPosts'));
     }
 
-    public function post(Post $post): Factory|View|Application
-    {
-        $comments = $post->comments()->orderBy('created_at', 'desc')->get();
-        return view('main.post', compact('post', 'comments'));
-    }
+
+
 }

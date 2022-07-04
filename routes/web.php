@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\TagController as AdminTagController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\CommentController as AdminCommentController;
 use App\Http\Controllers\LikedController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,16 @@ use App\Http\Controllers\LikedController;
 
 Route::get('/', [MainController::class, 'index'])->name('index');
 
-Route::get('post{post}', [MainController::class, 'post'])->name('post');
+
+
+Route::group([
+    'prefix' => 'posts',
+    'as' => 'posts.',
+], function (){
+    Route::get('show/{post}', [PostController::class, 'show'])->name('show');
+    Route::get('discussed', [PostController::class, 'discussed'])->name('discussed');
+});
+
 
 Route::group([
     'prefix' => 'comments',

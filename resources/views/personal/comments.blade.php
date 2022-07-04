@@ -19,7 +19,7 @@
                 <tbody>
                 @foreach($comments as $comment)
                     <tr>
-                        <td><a href="{{ route('post', $comment->post) }}" class="text-white text-decoration-none">{{ $comment->post->title }}</a></td>
+                        <td><a href="{{ route('posts.show', $comment->post) }}" class="text-white text-decoration-none">{{ $comment->post->title }}</a></td>
                         <td>{{ $comment->message }}</td>
                         <td class="d-flex justify-content-center">
                             <a href="{{ route('comments.edit', $comment) }}" class="text-warning" style="margin-right: 20px">

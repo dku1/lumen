@@ -28,7 +28,7 @@ class CommentController extends Controller
             'message' => $request->message,
         ]);
 
-        return redirect()->route('post', $post);
+        return redirect()->route('posts.show', $post);
     }
 
     public function edit(Comment $comment): Factory|View|Application

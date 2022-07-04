@@ -7,7 +7,7 @@
                 @endauth
             </div>
             <div class="col-4 text-center">
-                <a class="blog-header-logo text-dark" href="#">Lumen</a>
+                <a class="blog-header-logo text-dark" href="{{ route('index') }}">Lumen</a>
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
                 @auth()
@@ -27,9 +27,9 @@
         <nav class="nav d-flex justify-content-between">
             <a class="p-2 link-secondary" href="{{ route('index') }}">Главная</a>
             <a class="p-2 link-secondary" href="#">Категории</a>
-            <a class="p-2 link-secondary" href="#">Популярное</a>
+            <a class="p-2 link-secondary" href="#">Топ</a>
             <a class="p-2 link-secondary" href="#">Публикации недели</a>
-            <a class="p-2 link-secondary" href="#">Самое обсуждаемое</a>
+            <a class="p-2 link-secondary" href="{{ route('posts.discussed') }}">Самое обсуждаемое</a>
             <a class="p-2 link-secondary" href="#">Связаться с нами</a>
             <a class="p-2 link-secondary" href="{{ route('personal.index') }}">Личный кабинет</a>
             @auth()
