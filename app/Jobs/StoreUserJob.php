@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Mail\PasswordMail;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
@@ -10,6 +11,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class StoreUserJob implements ShouldQueue
@@ -38,5 +40,6 @@ class StoreUserJob implements ShouldQueue
         $password = Str::random(8);
         $this->data['password'] = Hash::make($password);
         $user = User::create($this->data);
+        Mail::to($this->data['email'])->send(new PasswordMail($password));
     }
 }
