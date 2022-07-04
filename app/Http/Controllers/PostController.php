@@ -21,4 +21,10 @@ class PostController extends Controller
         $posts = Post::withCount('comments')->orderBy('comments_count', 'desc')->get()->take(10);
         return view('post.discussed', compact('posts'));
     }
+
+    public function top(): Factory|View|Application
+    {
+        $posts = Post::withCount('likes')->orderBy('likes_count', 'desc')->get()->take(10);
+        return view('post.top', compact('posts'));
+    }
 }

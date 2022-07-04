@@ -27,7 +27,7 @@
         <nav class="nav d-flex justify-content-between">
             <a class="p-2 link-secondary" href="{{ route('index') }}">Главная</a>
             <a class="p-2 link-secondary" href="#">Категории</a>
-            <a class="p-2 link-secondary" href="#">Топ</a>
+            <a class="p-2 link-secondary" href="{{ route('posts.top') }}">Топ</a>
             <a class="p-2 link-secondary" href="#">Публикации недели</a>
             <a class="p-2 link-secondary" href="{{ route('posts.discussed') }}">Самое обсуждаемое</a>
             <a class="p-2 link-secondary" href="#">Связаться с нами</a>

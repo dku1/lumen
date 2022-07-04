@@ -33,6 +33,7 @@ Route::group([
 ], function (){
     Route::get('show/{post}', [PostController::class, 'show'])->name('show');
     Route::get('discussed', [PostController::class, 'discussed'])->name('discussed');
+    Route::get('top', [PostController::class, 'top'])->name('top');
 });
 
 
