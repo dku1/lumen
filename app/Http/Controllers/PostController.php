@@ -27,4 +27,10 @@ class PostController extends Controller
         $posts = Post::withCount('likes')->orderBy('likes_count', 'desc')->get()->take(10);
         return view('post.top', compact('posts'));
     }
+
+    public function week(): Factory|View|Application
+    {
+        $posts = Post::where('created_at', '>=', \Carbon\Carbon::now()->subWeeks(1))->orderBy('created_at', 'desc')->paginate(10);
+        return view('post.week', compact('posts'));
+    }
 }

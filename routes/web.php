@@ -34,6 +34,8 @@ Route::group([
     Route::get('show/{post}', [PostController::class, 'show'])->name('show');
     Route::get('discussed', [PostController::class, 'discussed'])->name('discussed');
     Route::get('top', [PostController::class, 'top'])->name('top');
+    Route::get('weeks', [PostController::class, 'week'])->name('week');
+
 });
 
 

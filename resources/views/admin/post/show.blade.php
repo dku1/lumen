@@ -63,7 +63,7 @@
                                 </tr>
                                 <tr>
                                     <td>Лайков</td>
-                                    <td>0</td>
+                                    <td>{{ $post->likes->count() }}</td>
                                 </tr>
                                 <tr>
                                     <td>Тэги</td>

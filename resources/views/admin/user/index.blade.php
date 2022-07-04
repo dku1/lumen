@@ -51,7 +51,7 @@
                                         <td>{{ $user->login }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->isAdmin() ? 'Администратор' : 'Читатель' }}</td>
-                                        <td>0</td>
+                                        <td>{{ $user->likes->count() }}</td>
                                         <td>{{ $user->comments->count() }}</td>
                                         <td>{{ $user->created_at->translatedFormat('F d, Y') }}</td>
                                         <td class="pt-1">

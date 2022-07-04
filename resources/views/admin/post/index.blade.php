@@ -51,7 +51,7 @@
                                                                  class="text-dark">{{ $post->title }}</a></td>
                                         <td><a href="{{ route('admin.categories.show', $post->category) }}"
                                                class="text-dark">{{ $post->category->title }}</a></td>
-                                        <td>0</td>
+                                        <td>{{ $post->likes->count() }}</td>
                                         <td>{{ $post->comments->count() }}</td>
                                         <td>{{ $post->created_at->translatedFormat('F d, Y') }}</td>
                                         <td class="pt-1">
