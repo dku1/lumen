@@ -67,20 +67,7 @@
             </div>
         @include('admin.layouts.sub-layouts.session-flash')
         <!-- SidebarSearch Form -->
-            <div class="form-inline">
-                <div class="input-group" data-widget="sidebar-search">
-                    <input class="form-control form-control-sidebar" type="search" placeholder="Поиск"
-                           aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-sidebar">
-                            <i class="fas fa-search fa-fw"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
             @include('admin.layouts.sub-layouts.admin-menu')
-
         </div>
         <!-- /.sidebar -->
     </aside>

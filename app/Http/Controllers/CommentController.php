@@ -39,7 +39,7 @@ class CommentController extends Controller
     public function update(Request $request, Comment $comment): RedirectResponse
     {
         $this->service->update($request, $comment);
-        return redirect()->route('post', $comment->post);
+        return redirect()->route('posts.show', $comment->post);
     }
 
     public function delete(Comment $comment): RedirectResponse

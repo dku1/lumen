@@ -19,12 +19,6 @@
                     Комментарии
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="shopping-cart" class="align-text-bottom"></span>
-                    Сброс пароля
-                </a>
-            </li>
         </ul>
     </div>
 </nav>

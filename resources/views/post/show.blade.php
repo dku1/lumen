@@ -12,7 +12,7 @@
         </div>
         <div class="col-12 d-flex justify-content-between m-auto">
             <div class="mt-5">
-                {{ $post->category->title }}
+                <a href="{{ route('posts.category', $post->category) }}" class="text-dark">{{ $post->category->title }}</a>
             </div>
             <div class="col-1 mt-5 mb-3 d-flex justify-content-end">
                 <span style="margin-right: 15px">
@@ -71,6 +71,25 @@
             </select>
         @endif
     </div>
+
+    @if($relatedPosts->count() != 0)
+        <div class="col-12">
+            <h4 class="text-center mt-3">Схожие посты</h4>
+            <div class="relations-posts d-flex justify-content-between mt-5">
+                @foreach($relatedPosts as $post)
+                    <div class="col-4 mb-3">
+                        <div class="card bg-dark text-white">
+                            <img src="{{ asset('storage/' . $post->preview_image) }}" class="card-img" alt="..." style="height: 200px">
+                            <div class="card-img-overlay">
+                                <a href="{{ route('posts.show', $post) }}" class="text-decoration-none"><h5 class="text-white card-title">{{ $post->title }}</h5></a>
+                                <p class="card-text">{{ $post->created_at->diffForHumans() }}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
 
     <section class="comment mb-3">
         <div class="container">

@@ -13,8 +13,9 @@ class PostController extends Controller
 {
     public function show(Post $post): Factory|View|Application
     {
+        $relatedPosts = Post::where('category_id', $post->category_id)->where('id', '!=', $post->id)->get()->take(3);
         $comments = $post->comments()->orderBy('created_at', 'desc')->get();
-        return view('post.show', compact('post', 'comments'));
+        return view('post.show', compact('post', 'comments', 'relatedPosts'));
     }
 
     public function discussed(): Factory|View|Application

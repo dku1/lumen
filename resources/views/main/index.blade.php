@@ -21,7 +21,7 @@
                             <h5 class="card-title mb-3"><a href="{{ route('posts.show', $post) }}"
                                                       class="text-dark">{{ $post->title }}</a></h5>
                             <p class="card-text">
-                                {{ $post->category->title }}
+                                <a href="{{ route('posts.category', $post->category) }}" class="text-dark">{{ $post->category->title }}</a>
                             </p>
                             <div class="d-flex justify-content-between">
                                 <p class="card-text"><small
