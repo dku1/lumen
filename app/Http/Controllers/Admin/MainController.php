@@ -17,6 +17,7 @@ class MainController extends Controller
         $postsCount = Post::all()->count();
         $commentsCount = Comment::all()->count();
         $readersCount = User::where('admin', 0)->get()->count();
-        return view('admin.main', compact('postsCount', 'commentsCount', 'readersCount'));
+        $likesCount = \DB::table('post_user_likes')->count();
+        return view('admin.main', compact('postsCount', 'commentsCount', 'readersCount', 'likesCount'));
     }
 }

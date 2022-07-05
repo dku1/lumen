@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\CommentController as AdminCommentController;
+use App\Http\Controllers\Admin\LikedController as AdminLikedController;
 use App\Http\Controllers\LikedController;
 use App\Http\Controllers\PostController;
 
@@ -85,6 +86,8 @@ Route::group([
     Route::resource('tags', AdminTagController::class)->except(['show']);
 
     Route::resource('users', AdminUserController::class)->except(['show']);
+
+    Route::get('post/top', [AdminLikedController::class, 'popularPosts'])->name('post.top');
 
     Route::get('comments/index', [AdminCommentController::class, 'index'])->name('comments.index');
     Route::delete('comments/delete/{comment}', [AdminCommentController::class, 'delete'])->name('comments.delete');

@@ -20,7 +20,8 @@ class TagController extends Controller
     public function index(): View|Factory|Application
     {
         $tags = Tag::paginate(8);
-        return view('admin.tag.index', compact('tags'));
+        $tagsCount = Tag::all()->count();
+        return view('admin.tag.index', compact('tags', 'tagsCount'));
     }
 
     /**

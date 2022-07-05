@@ -28,7 +28,7 @@
                 <div class="col-8 mt-3">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title ml-1">{{ $tags->count() }} тэгов</h3>
+                            <h3 class="card-title ml-1">{{ $tagsCount }} тэгов</h3>
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered table-hover text-center">

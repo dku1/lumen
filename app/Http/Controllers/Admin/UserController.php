@@ -23,7 +23,8 @@ class UserController extends Controller
     public function index(): View|Factory|Application
     {
         $users = User::paginate(10);
-        return view('admin.user.index', compact('users'));
+        $usersCount = User::all()->count();
+        return view('admin.user.index', compact('users', 'usersCount'));
     }
 
     /**
