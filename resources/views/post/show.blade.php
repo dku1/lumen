@@ -75,7 +75,7 @@
     @if($relatedPosts->count() != 0)
         <div class="col-12">
             <h4 class="text-center mt-3">Схожие посты</h4>
-            <div class="relations-posts d-flex justify-content-between mt-5">
+            <div class="relations-posts d-flex  mt-5">
                 @foreach($relatedPosts as $post)
                     <div class="col-4 mb-3">
                         <div class="card bg-dark text-white">

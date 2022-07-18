@@ -68,7 +68,7 @@
 
 @include('layouts.sub-layouts.header')
 
-<main class="container">
+<main class="container" style="min-height: 660px">
     @yield('content')
 </main>
 
